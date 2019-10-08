@@ -1,0 +1,28 @@
+{
+    "files.encoding": "shiftjis",
+    "files.associations": {
+        "*.menu": "text",
+        "adf": "text",
+        "*.string": "text",
+        "*.rc": "text",
+        "*.sh": "shellscript"
+    },
+    "[php]": {
+        "files.encoding": "eucjp"
+    },
+    "[shellscript]": {
+        "files.encoding": "eucjp"
+    },
+    "[perl]": {
+        "files.encoding": "eucjp"
+    },
+    "[properties]": {
+        "files.encoding": "shiftjis"
+    },
+    "[xml]": {
+        "files.encoding": "utf8"
+    },
+    "[markdown]": {
+        "files.encoding": "utf8"
+    }
+}

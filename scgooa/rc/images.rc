@@ -1,0 +1,5 @@
+BINARY         IDB_ICONS                rc/${gamen}/icons.gif
+BINARY         IDB_ICONL                rc/${gamen}/iconl.gif
+BINARY         IDB_ALPHA                rc/${gamen}/alpha.gif
+BINARY         IDB_GUI                  rc/${gamen}/gui.gif
+BINARY         IDB_BACK_IMAGE           rc/${gamen}/back.gif

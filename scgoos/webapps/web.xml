@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<servlet>
+		<servlet-name>IappliGateway</servlet-name>
+		<servlet-class>spicyproxy.ProxyServlet</servlet-class>
+		<init-param>
+			<param-name>ConfPath</param-name>
+			<param-value>/home/webapps/test-04/WEB-INF/iappli.properties</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>IappliGateway2</servlet-name>
+		<servlet-class>spicyproxy.ProxyServlet</servlet-class>
+		<init-param>
+			<param-name>ConfPath</param-name>
+			<param-value>/home/webapps/test-04/WEB-INF/iappli2.properties</param-value>
+		</init-param>
+	</servlet>
+
+    <servlet>
+		<servlet-name>ImodeGateway</servlet-name>
+		<servlet-class>spicyproxy.ProxyServlet</servlet-class>
+		<init-param>
+			<param-name>ConfPath</param-name>
+			<param-value>/home/webapps/test-04/WEB-INF/imode.properties</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>IappliGateway</servlet-name>
+		<url-pattern>/iagw/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ImodeGateway</servlet-name>
+		<url-pattern>/imgw/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>IappliGateway2</servlet-name>
+		<url-pattern>/iagw2/*</url-pattern>
+	</servlet-mapping>
+</web-app>
+

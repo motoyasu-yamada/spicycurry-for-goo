@@ -1,0 +1,21 @@
+*.h          text eol=crlf working-tree-encoding=cp932
+*.cpp        text eol=crlf working-tree-encoding=cp932
+*.java       text eol=crlf working-tree-encoding=cp932
+adf          text eol=crlf working-tree-encoding=cp932
+*.menu       text eol=crlf working-tree-encoding=cp932
+*.rc         text eol=lf
+
+*.string     text eol=crlf working-tree-encoding=cp932
+*.bat        text eol=crlf working-tree-encoding=cp932
+*.txt        text eol=crlf working-tree-encoding=cp932
+*.htm        text eol=crlf working-tree-encoding=cp932
+*.properties text eol=crlf working-tree-encoding=cp932
+*.htaccess   text eol=crlf working-tree-encoding=eucjp
+*.sh         text eol=lf   working-tree-encoding=eucjp
+*.php        text eol=crlf working-tree-encoding=eucjp
+*.pl         text eol=crlf working-tree-encoding=eucjp
+*.sql        text eol=crlf working-tree-encoding=eucjp
+*.json       text eol=lf   working-tree-encoding=utf8
+*.xml        text eol=lf   working-tree-encoding=utf8
+*.md         text eol=crlf working-tree-encoding=utf8
+errordocuments text eol=crlf

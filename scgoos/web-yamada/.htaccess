@@ -1,0 +1,23 @@
+php_value         include_path   .;c:/doc/cvswork/scgoo/scgoo/scgoos/conf-yamada/;c:/doc/cvswork/scgoo/scgoo/scgoos/src/;c:/doc/cvswork/scgoo/scgoo/scgoos/lib/
+php_value    always_populate_raw_post_data 1
+php_value    mbstring.detect_order          SJIS,EUC-JP,JIS
+php_value    mbstring.encoding_translation  0
+php_value    mbstring.func_overload         0
+php_value    mbstring.http_input           pass
+php_value    mbstring.http_output          pass
+php_value    register_globals              0
+php_value    short_open_tag                0
+php_value    error_reporting               2047
+php_value    mbstring.internal_encoding     EUC-JP
+php_value    mbstring.language              Japanese
+
+RewriteEngine On
+RewriteRule   ^([A-Za-z0-9\-]+)\/scm\.jam$       proxy.php [L]
+RewriteRule   ^([A-Za-z0-9\-]+)\/scm\.jar$       proxy.php [L]
+RewriteRule   ^([A-Za-z0-9\-]+)\/res\.(.+)$      proxy.php [L]
+RewriteRule   ^([A-Za-z0-9\-]+)\/api\.(.+)$      proxy.php [L]
+RewriteRule   ^([A-Za-z0-9\-]+)\/bg/(.+)$        http://localhost:8080/spicyproxy/iagw/$1/$2 [P]
+RewriteRule   ^index\.php$                       proxy.php [L]
+RewriteRule   ^download\.htm$                    proxy.php [L]
+
+Options         FollowSymlinks MultiViews ExecCGI

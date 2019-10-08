@@ -1,0 +1,18 @@
+<IfModule mod_php4.c>
+    php_value    include_path   .:/usr/local/lib/php:/home/sites/scx.spicysoft.com/scgoo/src:/home/sites/scx.spicysoft.com/scgoo/lib:/home/sites/scx.spicysoft.com/scgoo/conf-t:/home/sites/scx.spicysoft.com/scgoo/admin-src/:/home/sites/scx.spicysoft.com/scgoo/admin-template/
+    php_value    always_populate_raw_post_data  1
+    php_value    mbstring.detect_order           Windows-31J,EUCJP-WIN,JIS
+    php_value    mbstring.encoding_translation   0
+    php_value    mbstring.func_overload          0
+    php_value    mbstring.http_input             pass
+    php_value    mbstring.http_output            pass
+    php_value    register_globals                0
+    php_value    short_open_tag                  0
+    php_value    error_reporting                 2047
+    php_value    mbstring.internal_encoding      EUCJP-WIN
+    php_value    mbstring.language               Japanese
+</IfModule>
+
+RewriteEngine On
+RewriteRule   ^.+\.php$   proxy.php
+RewriteRule   ^.+\.htm$   proxy.php

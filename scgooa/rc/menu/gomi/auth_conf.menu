@@ -1,0 +1,2 @@
+IDM_FINGERPRINT_AUTH_ON        起動時指紋認証を利用する
+IDM_FINGERPRINT_AUTH_OFF       起動時指紋認証を利用しない

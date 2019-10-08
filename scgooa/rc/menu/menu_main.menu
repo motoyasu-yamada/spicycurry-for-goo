@@ -1,0 +1,11 @@
+IDM_MAIN_INPUT_URL              URL入力
+IDM_MAIN_DISPLAY_URL            URL表示
+IDM_MAIN_HOME                   ﾓﾊﾞｲﾙgoo
+IDM_MAIN_RELOAD                 ﾍﾟｰｼﾞ再読込
+IDM_MAIN_BOOKMARK_ADD           ﾌﾞｯｸﾏｰｸ追加
+IDM_MAIN_BOOKMARK               ﾌﾞｯｸﾏｰｸ一覧
+IDM_MAIN_FONTSIZE               文字ｻｲｽﾞ変更
+IDM_MAIN_IMAGE                  画像表示設定
+IDM_MAIN_PACKETS                ﾊﾟｹｯﾄ節約累計
+IDM_MAIN_CLEAR_PACKETS          ﾊﾟｹｯﾄ節約累計ｸﾘｱ
+IDM_MAIN_SET_PRIVATE_ICON       ﾌﾟﾗｲﾍﾞｰﾄｱｲｺﾝに登録

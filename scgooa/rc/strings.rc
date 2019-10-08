@@ -1,0 +1,37 @@
+STRING         IDS                      rc/string.string
+STRING         IDM_IMG_DIR              rc/menu/img_dir.menu
+STRING         IDM_BROWSER              rc/menu/menu_main.menu
+STRING         IDM_FONTSIZE             rc/menu/menu_fonts.menu
+STRING         IDM_IMAGE                rc/menu/menu_image.menu
+STRING         IDM_BOOKMARK             rc/menu/menu_bookmark.menu
+STRING         IDM_POPUP_POLLING_CONF   rc/menu/popup_polling_config.menu
+STRING         IDM_IMG_PLAYER_ATTACH    rc/menu/img_player_attach.menu
+STRING         IDM_IMG_PLAYER_VIEW      rc/menu/img_player_view.menu
+#       アイコンリスト
+STRING         IDM_MAIN                 rc/menu/main.menu
+#       アイコン定義
+STRING         IDM_MAIN_ITEM1           rc/menu/main_item1.menu
+STRING         IDM_MAIN_ITEM2           rc/menu/main_item2.menu
+STRING         IDM_MAIN_ITEM3           rc/menu/main_item3.menu
+STRING         IDM_MAIN_ITEM4           rc/menu/main_item4.menu
+STRING         IDM_MAIN_ITEM5           rc/menu/main_item5.menu
+STRING         IDM_MAIN_ITEM6           rc/menu/main_item6.menu
+STRING         IDM_MAIN_ITEM7           rc/menu/main_item7.menu
+STRING         IDM_MAIN_ITEM8           rc/menu/main_item8.menu
+STRING         IDM_MAIN_ITEM9           rc/menu/main_item9.menu
+STRING         IDM_ICON_MENU_APPLI      rc/menu/icon_menu_appli.menu
+STRING         IDM_ICON_MENU_PRIVATE    rc/menu/icon_menu_private.menu
+STRING         IDM_MAIN_URL1            rc/menu/main_url1.menu
+STRING         IDM_MAIN_URL2            rc/menu/main_url2.menu
+STRING         IDM_MAIN_URL3            rc/menu/main_url3.menu
+STRING         IDM_MAIN_URL4            rc/menu/main_url4.menu
+STRING         IDM_MAIN_URL5            rc/menu/main_url5.menu
+STRING         IDM_MAIN_URL6            rc/menu/main_url6.menu
+STRING         IDM_MAIN_URL7            rc/menu/main_url7.menu
+STRING         IDM_MAIN_URL8            rc/menu/main_url8.menu
+STRING         IDM_MAIN_URL9            rc/menu/main_url9.menu
+STRING         IDM_ICON_ACTION_APPLI    rc/menu/icon_action_appli.menu
+STRING         IDM_ICON_ACTION_PRIVATE  rc/menu/icon_action_private.menu
+#       設定メニュー
+STRING         IDM_MAIN_ITEM_CONF       rc/menu/main_item_conf.menu
+STRING         IDM_MAIN_URL_CONF        rc/menu/main_url_conf.menu

@@ -1,0 +1,25 @@
+<IfModule mod_php4.c>
+    php_value    include_path   .:/usr/local/lib/php:/home/sites/sc-goo.spicysoft.com/goo1.1/current/src:/home/sites/sc-goo.spicysoft.com/goo1.1/current/lib:/home/sites/sc-goo.spicysoft.com/goo1.1/current-conf
+   php_value    always_populate_raw_post_data  1
+   php_value    mbstring.detect_order           sjis,euc-jp,jis
+   php_value    mbstring.encoding_translation   0
+   php_value    mbstring.func_overload          0
+   php_value    mbstring.http_input             pass
+   php_value    mbstring.http_output            pass
+   php_value    register_globals                0
+   php_value    short_open_tag                  0
+   php_value    error_reporting                 2047
+   #php_value    mbstring.internal_encoding      EUCJP-WIN
+   php_value    mbstring.language               Japanese
+</IfModule>
+
+RewriteEngine On
+RewriteRule   ^index\.php$                       proxy.php
+RewriteRule   ^download\.htm$                    proxy.php
+RewriteRule   ^([A-Za-z0-9\-]+)\/scm\.jam$       proxy.php
+RewriteRule   ^([A-Za-z0-9\-]+)\/scm\.jar$       proxy.php
+RewriteRule   ^([A-Za-z0-9\-]+)\/res\.(.+)$      proxy.php
+RewriteRule   ^([A-Za-z0-9\-]+)\/api\.(.+)$      proxy.php
+RewriteRule   ^([A-Za-z0-9\-]+)\/bg/(.+)$        http://172.30.100.254:8080/scgoo/iagw2/goo-$1/$2 [P]
+
+Options         FollowSymlinks MultiViews ExecCGI

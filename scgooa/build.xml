@@ -1,0 +1,247 @@
+<project name    = "SpicyCurry"
+         default = "debug_run"
+         basedir = ".">
+
+        <!--    Environment -->
+        <property environment = "env"/>
+        <property name = "doja_home"      value = "${env.DOJA_HOME}"/>
+        <property name = "exec.preverify" value = "${doja_home}\bin\preverify.exe"/>
+        <property name = "exec.doja"      value = "${doja_home}\bin\doja_g.exe"/>
+        <property name = "exec.jamu"      value = "${doja_home}\bin\jamu.exe"/>
+        <property name = "doja.classes"   value = "${doja_home}\lib\doja_classes.zip"/>
+        <property name = "doja.conv"      value = "${doja_home}\lib\dojaconv.jar"/>
+        <property name = "doja.kvm"       value = "${doja_home}\lib\classes.zip"/>
+
+        <!--    Read properties from the property file.
+                the path of the property file is specified by the ${properties}.
+        -->
+        <property name = "appliname" value="${dst}"/>
+
+        <!-- Input directory. -->
+        <property name = "src"             value="src"/>
+        <property name = "packagedir"      value="packages/${plat}"/>
+        <property name = "browser_include" value = "browser"/>
+
+        <!-- Temporary use directory -->
+        <property name = "temp"        value="../../temp/${dst}"/>
+        <property name = "includes"    value="${temp}/include"/>
+        <property name = "precompiled" value="${temp}/precompiled"/>
+        <property name = "compiled"    value="${temp}/classes"/>
+        <property name = "obfuscated"  value="${temp}/obfuscated"/>
+        <property name = "preverified" value="${temp}/preverified"/>
+        <property name = "archive"     value="${temp}/archive"/>
+        <property name = "run"         value="${temp}/run"/>
+        <property name = "sp"          value="${temp}/sp"/>
+        <property name = "browser_include" value = "${temp}/browser"/>
+
+        <!-- Output directory.  -->
+        <property name = "bin" value = "../../output/goo_bin/${dst}"/>
+        <property name = "res" value = "../../output/goo_res/"/>
+        
+        <property name = "cclasses" value="${env.SS_DOJA_ANT_OLD}"/>
+        <taskdef name="CPP32"         classname="com.spicysoft.ant.CPP32"          classpath="${cclasses}"/>
+        <taskdef name="JavaBlender"   classname="com.spicysoft.ant.JavaBlender"    classpath="${cclasses}"/>
+        <taskdef name="DojaC"         classname="com.spicysoft.ant.DojaCompile"    classpath="${cclasses}"/>
+        <taskdef name="Doja"          classname="com.spicysoft.ant.DojaRun"        classpath="${cclasses}"/>
+        <taskdef name="ResCompile"    classname="com.spicysoft.ant.ResCompile"     classpath="${cclasses}"/>
+        <taskdef name="DojaUpdateJam" classname="com.spicysoft.ant.DojaUpdateJam"  classpath="${cclasses}"/>
+
+		<target  name = "init_release">
+    	    <property name = "buildmode" value = "RELEASE"/>
+		</target>
+		
+		<target  name = "init_debug">
+	        <property name = "buildmode" value = "DEBUG"/>
+		</target>
+
+        <target  name = "mrcompile">
+                <delete dir = "${includes}"/>
+                <mkdir  dir = "${includes}"/>
+                <mkdir  dir = "${res}"/>
+                <ResCompile make    = "rc/strings.rc"
+                            head    = "${includes}/mrc.h"
+                            res     = "${res}/mr.${dst}"
+                            maxsize = "${max_res_len}"/>
+                <ResCompile make    = "rc/images.rc"
+                            head    = "${includes}/mrc2.h"
+                            res     = "${res}/ir.${dst}"
+                            maxsize = "${max_res_len}"
+                            env     = "gamen=${gamen}"/>
+                <copy file = "rc/${gamen}/m0.gif" toFile = "${res}/m0.gif.${dst}"/>
+                <echo message="rc/${gamen}/m0.gif"/>
+        </target>
+
+        <!-- Precompile to java sourcecodes. -->
+        <target name        = "precompile"
+                depends     = "mrcompile">
+                <delete dir = "${precompiled}"/>
+                <mkdir  dir = "${precompiled}"/>
+                <copy   file    = "${packagedir}/configurem.h"
+                        toFile  = "${includes}/configurem.h"/>
+
+                <CPP32      src     = "${src}/A.cpp"
+                            dst     = "${precompiled}/A.java"
+                            defines = "${buildmode}">
+                    <include>
+                        <pathelement location = "${includes}"/>
+                        <pathelement location = "${browser_include}"/>
+                    </include>
+                </CPP32>
+        </target>  
+        
+        <!-- Compile java sourcecodes. -->
+        <target name    = "compile"
+                depends = "precompile"> 
+                
+                <condition 
+                        property = "javac_debug"
+                        value    = "-g">
+                        <equals arg1 = "${buildmode}" arg2 = "DEBUG"/>
+                </condition>
+                <condition 
+                        property = "javac_debug"
+                        value    = "-g:none">
+                        <equals arg1 = "${buildmode}" arg2 = "RELEASE"/>
+                </condition>
+                <condition 
+                        property = "to_obfuscate"
+                        value    = "true">
+                        <equals arg1 = "${buildmode}" arg2 = "RELEASE"/>
+                </condition>
+
+                <delete   dir="${compiled}"/> 
+                <mkdir    dir="${compiled}"/>
+                <copy   file  ="${src}/FileSystem.java"
+                        toFile="${precompiled}\FileSystem.java">
+                </copy>
+                <copy   file  ="${src}/SystemMessage.java"
+                        toFile="${precompiled}\SystemMessage.java"/>
+                <DojaC doja = "${doja_home}" src = "${precompiled}" dst = "${compiled}"/>
+        </target>
+
+        <target name    = "obfuscate_1"
+                depends = "compile" 
+                unless  = "to_obfuscate"> 
+                <delete file = "${bin}.jam"/>
+                <delete   dir="${obfuscated}"/>
+                <mkdir    dir="${obfuscated}"/>
+                <copy   toDir="${obfuscated}">
+                        <fileset dir = "${compiled}"/>
+                </copy>
+                <copy   file  ="${packagedir}/adf"
+                        toFile="${bin}.jam"/>
+        </target>
+
+        <target name    = "obfuscate_2"
+                depends = "compile" 
+                if      = "to_obfuscate"> 
+                <delete file = "${bin}.jam"/>
+                <delete   dir="${obfuscated}"/>
+                <mkdir    dir="${obfuscated}"/>
+                <copy   file  ="${packagedir}/adf"
+                        toFile="${bin}.jam"/>
+
+                <JavaBlender
+                    src     = "${compiled}"
+                    dst     = "${obfuscated}"
+                    jam     = "${bin}.jam">
+                </JavaBlender>
+
+        </target>
+
+        <target name    = "preverify"
+                depends = "compile,obfuscate_1,obfuscate_2">
+                <delete dir="${preverified}"/>
+                <mkdir  dir="${preverified}"/>
+                
+                <exec executable  = "${exec.preverify}"
+                        failonerror = "on">
+                        <arg line="-classpath"/>
+                        <arg line="${doja.classes};${doja.kvm}"/>
+                        <arg line="-d"/>
+                        <arg path="${preverified}"/>
+                        <arg path="${obfuscated}"/>
+                </exec>
+        </target>
+        
+        <target name    = "prearchive"
+                depends = "preverify">
+                <delete   dir="${archive}"/>
+                <copy   toDir="${archive}">
+                        <fileset dir = "${preverified}"/>
+                </copy>
+        </target>
+
+        
+        <target name        = "archive"
+                depends     = "prearchive">
+                <delete file = "${bin}.jar"/>
+                <exec   executable      = "7z"
+                        failonerror     = "on"
+                        dir             = "${archive}">
+                        <arg line = "a"                      />
+                        <arg line = "-tzip"                  />
+                        <arg path = "${bin}.jar"/>
+                        <arg line = "*"                      />
+                </exec>
+        </target>
+
+        <target name        = "build" 
+                depends     = "archive">
+                <DojaUpdateJam jam = "${bin}.jam"
+                               jar = "${bin}.jar"/>
+
+                <exec executable  = "perl"
+                        failonerror = "on">
+                        <arg path = "tools/updatejam.pl"/>
+                        <arg line="lvs"/>
+                        <arg path = "${bin}.jam"/>
+                        <arg path = "${bin}.jar"/>
+                </exec>
+                <delete dir = "${run}"/>
+                <mkdir  dir = "${run}"/>
+        </target>
+
+        <target name        = "clean-sp">
+                <delete dir = "${sp}"/>
+        </target>
+
+        <target name        = "debug_run" depends = "init_debug, build">
+                
+                <copy file = "${bin}.jam" toFile = "${run}/scm.jam"/>
+                <copy file = "${bin}.jar" toFile = "${run}/scm.jar"/>
+
+                <replace file  = "${run}/scm.jam"
+                         token = "${UserID}"
+                         value = "ser1234567890X;icc12345678901234567890"/>
+
+                <Doja 
+                      
+                      doja       = "${doja_home}"
+                      run        = "${run}"
+                      jam        = "scm.jam"
+                      adfurl     = "${adfurl}"
+                      useragent  = "${ua}"
+                      />
+        </target>
+        
+        <target name        = "release_run" depends = "init_release, build">
+                
+                <copy file = "${bin}.jam" toFile = "${run}/scm.jam"/>
+                <copy file = "${bin}.jar" toFile = "${run}/scm.jar"/>
+
+                <replace file  = "${run}/scm.jam"
+                         token = "${UserID}"
+                         value = "ser1234567890X;icc12345678901234567890"/>
+
+                <Doja 
+                      
+                      doja       = "${doja_home}"
+                      run        = "${run}"
+                      jam        = "scm.jam"
+                      adfurl     = "${adfurl}"
+                      useragent  = "${ua}"
+                      />
+        </target>
+
+</project>

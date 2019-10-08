@@ -1,0 +1,26 @@
+<IfModule mod_php4.c>
+    php_value    include_path   .:/usr/local/lib/php:/home/sites/sc-goo.spicysoft.com/goo1.1/current/src:/home/sites/sc-goo.spicysoft.com/goo1.1/current/lib:/home/sites/sc-goo.spicysoft.com/goo1.1/current-conf:/home/sites/sc-goo.spicysoft.com/goo1.1/current/admin-src/:/home/sites/sc-goo.spicysoft.com/goo1.1/current/admin-template/
+    php_value    always_populate_raw_post_data  1
+    php_value    mbstring.detect_order           Windows-31J,EUCJP-WIN,JIS
+    php_value    mbstring.encoding_translation   0
+    php_value    mbstring.func_overload          0
+    php_value    mbstring.http_input             pass
+    php_value    mbstring.http_output            pass
+    php_value    register_globals                0
+    php_value    short_open_tag                  0
+    php_value    error_reporting                 2047
+    php_value    mbstring.internal_encoding      EUCJP-WIN
+    php_value    mbstring.language               Japanese
+</IfModule>
+
+RewriteEngine On
+RewriteRule   ^.+\.php$   proxy.php
+RewriteRule   ^.+\.htm$   proxy.php
+
+order deny,allow
+deny from all
+allow from 210.150.185.152/29
+allow from 211.19.117.0/26
+
+Options         FollowSymlinks MultiViews ExecCGI
+

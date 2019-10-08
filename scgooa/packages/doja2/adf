@@ -1,0 +1,15 @@
+AppName=どこでもgoo
+PackageURL=scm.jar
+LastModified=${LastModified}
+AppVer=${AppVer}
+AppClass=A
+AppSize=${JarSize}
+MyConcierge=Yes
+SPsize=102400
+UseNetwork=http
+UseTelephone=call
+AppParam=${UserID} ${AppVer}
+AccessUserInfo=yes
+UseBrowser=launch
+LaunchApp=yes
+ProfileVer=DoJa-2.0
